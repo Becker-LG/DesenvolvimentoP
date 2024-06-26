@@ -15,5 +15,8 @@ app.post("/cadastro", function(req, res){
     res.send('dale')
 })
 
+/*app.get("/games/:id", function(req, res){
+    const id = req.params.id
+})*/
 
 app.listen(3000,function(){console.log('Servidor iniciado!')})
