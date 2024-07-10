@@ -15,6 +15,10 @@ app.post("/cadastro", function(req, res){
     res.send('dale')
 })
 
+app.get("/login/:id", function(req, res){
+    const id = req.params.id
+})
+
 /*app.get("/games/:id", function(req, res){
     const id = req.params.id
 })*/

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de login</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div>
+        <h1>Login</h1>
+        <form id="formLogin">
+            <input type="text" placeholder="nome">
+            <br><br>
+            <input type="password" placeholder="senha">
+            <br><br>
+            <button>Enviar</button>
+        </form>
+    </div>
+</body>
+<script>
+    const form = document.getElementById("formLogin")
+    form.addEventListener("submit", function(ev){
+        ev.preventDefault()
+        const formData = Object.fromEntries(new FormData(form).entries())
+        fetch("http://localhost:3000/login", {
+            method: "GET",
+            body: JSON.stringify({nome: formData.nome, pass: formData.pass}),
+            headers: {
+                "Content-Type":"application/json"
+            }
+        }).then(function(){
+            console.log('Cadastrado com sucesso!')
+        }).catch(function(){console.log('Deu merda.')})
+    })
+</script>
+</html>
