@@ -17,6 +17,9 @@ app.post("/cadastro", function(req, res){
 
 app.get("/login/:id", function(req, res){
     const id = req.params.id
+    db.serialize(function(){
+        db.run("select")
+    })
 })
 
 /*app.get("/games/:id", function(req, res){

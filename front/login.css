@@ -19,6 +19,8 @@ input{
     border: none;
     outline: none;
     font-size: 15px;
+    border-radius: 10px;
+    width: 88%;
 }
 
 button{
@@ -34,4 +36,8 @@ button{
 button:hover{
     background-color: deepskyblue;
     cursor: pointer;
+}
+
+a{
+    color: deepskyblue;
 }

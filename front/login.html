@@ -9,13 +9,13 @@
 <body>
     <div>
         <h1>Login</h1>
-        <form id="formLogin">
-            <input type="text" placeholder="nome">
-            <br><br>
-            <input type="password" placeholder="senha">
-            <br><br>
-            <button>Enviar</button>
-        </form>
+        <input type="email" placeholder="E-mail" name="email">
+        <br><br>
+        <input type="password" placeholder="Senha" name="pass">
+        <br><br>
+        <button>Enviar</button>
+        <br><br>
+        <a href="cadastro.html">Não tem uma conta? Cadastre-se</a>
     </div>
 </body>
 <script>
@@ -25,12 +25,12 @@
         const formData = Object.fromEntries(new FormData(form).entries())
         fetch("http://localhost:3000/login", {
             method: "GET",
-            body: JSON.stringify({nome: formData.nome, pass: formData.pass}),
+            body: JSON.stringify({email: formData.email, pass: formData.pass}),
             headers: {
                 "Content-Type":"application/json"
             }
         }).then(function(){
-            console.log('Cadastrado com sucesso!')
+            console.log('Logado com sucesso!')
         }).catch(function(){console.log('Deu merda.')})
     })
 </script>

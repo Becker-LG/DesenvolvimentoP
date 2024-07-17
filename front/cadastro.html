@@ -1,11 +1,26 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=, initial-scale=1.0">
-    <title>Sistema Financeiro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de login</title>
+    <link rel="stylesheet" href="cadastro.css">
 </head>
 <body>
+    <div>
+        <h1>Login</h1>
+        <form id="formCadastro">
+            <input type="email" placeholder="E-mail" name="email">
+            <br><br>
+            <input type="password" placeholder="Senha" name="pass">
+            <br><br>
+            <button>Enviar</button>
+        </form>
+    </div>
+</body>
+</html>
+
+<!---<body>
     <h1>Sistema Financeiro</h1>
     <form id="formCadastro">
         <label>Email:</label><input type="email" name="email"><br>
@@ -13,20 +28,3 @@
         <button>cadastrar</button>
     </form>
 </body>
-<script>
-    const form = document.getElementById("formCadastro")
-    form.addEventListener("submit", function(ev){
-        ev.preventDefault()
-        const formData = Object.fromEntries(new FormData(form).entries())
-        fetch("http://localhost:3000/cadastro", {
-            method: "POST",
-            body: JSON.stringify({email: formData.email, pass: formData.pass}),
-            headers: {
-                "Content-Type":"application/json"
-            }
-        }).then(function(){
-            console.log('Cadastrado com sucesso!')
-        }).catch(function(){console.log('Deu merda.')})
-    })
-</script>
-</html>
