@@ -1,30 +1,145 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tela de login</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
     <link rel="stylesheet" href="cadastro.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 </head>
 <body>
-    <div>
-        <h1>Login</h1>
-        <form id="formCadastro">
-            <input type="email" placeholder="E-mail" name="email">
-            <br><br>
-            <input type="password" placeholder="Senha" name="pass">
-            <br><br>
-            <button>Enviar</button>
-        </form>
+    <div class="container">
+        <div class="content first-content">
+            <div class="first-column">
+                <h2 class="title title-primary">Bem-vindo!</h2>
+                <p class="description description-primary">Para continuar conosco</p>
+                <p class="description description-primary">porfavor coloque suas informações</p>
+                <button id="signin" class="btn btn-primary">entre</button>
+            </div>    
+            <div class="second-column">
+                <h2 class="title title-second">criar conta</h2>
+                <div class="social-media">
+                    <ul class="list-social-media">
+                        <a class="link-social-media" href="#">
+                            <li class="item-social-media">
+                                <i class="fab fa-facebook-f"></i>        
+                            </li>
+                        </a>
+                        <a class="link-social-media" href="#">
+                            <li class="item-social-media">
+                                <i class="fab fa-google-plus-g"></i>
+                            </li>
+                        </a>
+                        <a class="link-social-media" href="#">
+                            <li class="item-social-media">
+                                <i class="fab fa-linkedin-in"></i>
+                            </li>
+                        </a>
+                    </ul>
+                </div><!-- social media -->
+                <p class="description description-second">ou use seu email para registro:</p>
+                <form class="form" id="formCadastro">
+                    <label class="label-input" for="">
+                        <i class="far fa-user icon-modify"></i>
+                        <input type="text" placeholder="Nome" name="nameCadastro">
+                    </label>
+                    
+                    <label class="label-input" for="">
+                        <i class="far fa-envelope icon-modify"></i>
+                        <input type="email" placeholder="Email" name="emailCadastro">
+                    </label>
+                    
+                    <label class="label-input" for="">
+                        <i class="fas fa-lock icon-modify"></i>
+                        <input type="password" placeholder="Senha" name="passCadastro">
+                    </label>
+                    
+                    
+                    <button class="btn btn-second">criar</button>        
+                </form>
+            </div><!-- second column -->
+        </div><!-- first content -->
+        <div class="content second-content">
+            <div class="first-column">
+                <h2 class="title title-primary">Olá parça!</h2>
+                <p class="description description-primary">Coloque suas informações</p>
+                <p class="description description-primary">e começe uma jornada conosco</p>
+                <button id="signup" class="btn btn-primary">crie</button>
+            </div>
+            <div class="second-column">
+                <h2 class="title title-second">sign in to developer</h2>
+                <div class="social-media">
+                    <ul class="list-social-media">
+                        <a class="link-social-media" href="#">
+                            <li class="item-social-media">
+                                <i class="fab fa-facebook-f"></i>
+                            </li>
+                        </a>
+                        <a class="link-social-media" href="#">
+                            <li class="item-social-media">
+                                <i class="fab fa-google-plus-g"></i>
+                            </li>
+                        </a>
+                        <a class="link-social-media" href="#">
+                            <li class="item-social-media">
+                                <i class="fab fa-linkedin-in"></i>
+                            </li>
+                        </a>
+                    </ul>
+                </div><!-- social media -->
+                <p class="description description-second">ou use seu email:</p>
+                <form class="form" id="formLogin">
+                
+                    <label class="label-input" for="">
+                        <i class="far fa-envelope icon-modify"></i>
+                        <input type="email" placeholder="Email" name="emailLogin">
+                    </label>
+                
+                    <label class="label-input" for="">
+                        <i class="fas fa-lock icon-modify"></i>
+                        <input type="password" placeholder="Password" name="passLogin">
+                    </label>
+                
+                    <a class="password" href="#">esqueceu sua senha?</a>
+                    <button class="btn btn-second">entre</button>
+                </form>
+            </div><!-- second column -->
+        </div><!-- second-content -->
     </div>
+    <script src="cadastro.js"></script>
 </body>
-</html>
+<script>
+    const form = document.getElementById("formCadastro")
+    form.addEventListener("submit", function(ev){
+        ev.preventDefault()
+        const formData = Object.fromEntries(new FormData(form).entries())
+        fetch("http://localhost:3000/cadastro", {
+            method: "POST",
+            body: JSON.stringify({name: formData.nameCadastro, email: formData.emailCadastro, pass: formData.passCadastro}),
+            headers: {
+                "Content-Type":"application/json"
+            }
+        }).then(function(){
+            console.log('Cadastrado com sucesso!')
+        }).catch(function(){console.log('Deu merda.')})
+    })
 
-<!---<body>
-    <h1>Sistema Financeiro</h1>
-    <form id="formCadastro">
-        <label>Email:</label><input type="email" name="email"><br>
-        <label>Senha:</label><input type="password" name="pass"><br>
-        <button>cadastrar</button>
-    </form>
-</body>
+    const formDois = document.getElementById("formLogin")
+    formDois.addEventListener("submit", function(ev){
+        ev.preventDefault()
+        const formData = Object.fromEntries(new FormData(formDois).entries())
+        const response = fetch("http://localhost:3000/login", {
+            method: "POST",
+            body: JSON.stringify({email: formData.emailLogin, pass: formData.passLogin}),
+            headers: {
+                "Content-Type":"application/json"
+            }
+        }).then(function(){
+            console.log('Logado com sucesso!')
+        }).catch(function(){console.log('Deu merda.')})
+        console.log(response)
+    })
+</script>
+</html>
