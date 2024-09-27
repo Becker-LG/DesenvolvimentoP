@@ -15,29 +15,19 @@ app.post("/cadastro", function(req, res){
     res.send('dale')
 })
 
-/*db.serialize(function(){
-    db.all("SELECT id FROM users WHERE email = ? and pass = ?", [email, pass], function(err, rows) {
-        if(err) return;
-        rows.forEach(function (row) {
-            console.log(row.id);
-        })
-	});	
-})
-db.close();*/
-/*
-app.get("/login", function(req, res){
+app.post("/login", function(req, res){
     db.serialize(function(){
-        db.all("SELECT * FROM users", function(err, rows) {
-            rows.forEach(function (row) {
-                console.log(row.email, row.pass);
-            })
+        db.all("SELECT id FROM users WHERE email = ? and pass = ?", [req.body.email, req.body.pass], function(err, rows) {
+            if(err) return res.sendStatus(401);
+            if(rows && rows[0] && rows[0].id) return res.sendStatus(200);
+            res.sendStatus(401);
         });	
     })
-    db.close();
+/*    db.close();*/
 })
-*/
-/*app.get("/games/:id", function(req, res){
+
+app.get("/games/:id", function(req, res){
     const id = req.params.id
-})*/
+})
 
 app.listen(3000,function(){console.log('Servidor iniciado!')})

@@ -136,8 +136,13 @@
             headers: {
                 "Content-Type":"application/json"
             }
-        }).then(function(){
-            console.log('Logado com sucesso!')
+        }).then(function(res){
+            if (res.status == 200){
+                console.log('Logado com sucesso!')
+            }
+            else{
+                console.log('Erro no login!')
+            };
         }).catch(function(){console.log('Deu merda.')})
         console.log(response)
     })
