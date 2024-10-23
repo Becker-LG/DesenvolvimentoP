@@ -1,16 +1,9 @@
 import db from "./db.js"
 
-db.serialize(function(){
-    db.run("create table if not exists users(id integer primary key autoincrement, name varchar(255), email varchar(255), pass varchar(255))")
-    //db.run("create table if not exists storage(id integer primary key autoincrement, name varchar(255), quantity integer, price real")
-    //db.run("create table if not exists client(id integer primary key autoincrement, name varchar(255), email varchar(255), cnpj(18)")
-})
-/*
-db.serialize(function(){
-    db.run("create table if not exists stock(id integer primary key autoincrement, name varchar(255), quantity int(), price real()")
-})
-
-db.serialize(function(){
-    db.run("create table if not exists client(id integer primary key autoincrement, name varchar(255), email varchar(255), cnpj(18)")
-})*/
-db.close()
+db.serialize(function() {
+    db.run("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255), email VARCHAR(255), pass VARCHAR(255))");
+    db.run("CREATE TABLE IF NOT EXISTS storage (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255), quantity INTEGER, price REAL)");
+    db.run("CREATE TABLE IF NOT EXISTS client(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255), email VARCHAR(255), cpf VARCHAR(14))")
+    db.run("CREATE TABLE IF NOT EXISTS company(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255), email VARCHAR(255), cnpj VARCHAR(18))")
+});
+db.close();

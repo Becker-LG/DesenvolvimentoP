@@ -23,11 +23,11 @@ app.post("/login", function(req, res){
             res.sendStatus(401);
         });	
     })
-/*    db.close();*/
+    //db.close();
 })
 
-app.get("/games/:id", function(req, res){
+/*app.get("/games/:id", function(req, res){
     const id = req.params.id
-})
+})*/
 
 app.listen(3000,function(){console.log('Servidor iniciado!')})
