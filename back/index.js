@@ -6,6 +6,9 @@ import db from "./db.js"
 const app = express()
 app.use(bodyparser.json())
 app.use(cors())
+
+//cadastro geral ==================================================================================================================
+
 app.post("/cadastro", function(req, res){
     console.log('cadastro', req.body)
     db.serialize(function(){
@@ -24,6 +27,39 @@ app.post("/login", function(req, res){
         });	
     })
     //db.close();
+})
+
+//cadastro empresas ==================================================================================================================
+
+app.post("/cadastroEmpresa", function(req, res){
+    console.log('cadastro', req.body)
+    db.serialize(function(){
+        db.run("insert into company(name, email, cnpj) values(?, ?, ?)", [req.body.name, req.body.email, req.body.cnpj])
+    })
+    db.close()
+    res.send('dale')
+})
+
+//cadastro clientes ==================================================================================================================
+
+app.post("/cadastroClientes", function(req, res){
+    console.log('cadastro', req.body)
+    db.serialize(function(){
+        db.run("insert into users(name, email, cnpj) values(?, ?, ?)", [req.body.name, req.body.email, req.body.cnpj])
+    })
+    db.close()
+    res.send('dale')
+})
+
+//cadastro estoque ==================================================================================================================
+
+app.post("/cadastroEmpresas", function(req, res){
+    console.log('cadastro', req.body)
+    db.serialize(function(){
+        db.run("insert into users(name, email, cnpj) values(?, ?, ?)", [req.body.name, req.body.email, req.body.cnpj])
+    })
+    db.close()
+    res.send('dale')
 })
 
 /*app.get("/games/:id", function(req, res){
