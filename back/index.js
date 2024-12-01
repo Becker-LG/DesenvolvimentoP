@@ -32,7 +32,7 @@ app.post("/login", function(req, res){
 //cadastro empresas ==================================================================================================================
 
 app.post("/cadastroEmpresa", function(req, res){
-    console.log('cadastro', req.body)
+    console.log('cadastro Empresa', req.body)
     db.serialize(function(){
         db.run("insert into company(name, email, cnpj) values(?, ?, ?)", [req.body.name, req.body.email, req.body.cnpj])
     })
@@ -42,10 +42,10 @@ app.post("/cadastroEmpresa", function(req, res){
 
 //cadastro clientes ==================================================================================================================
 
-app.post("/cadastroClientes", function(req, res){
+app.post("/cadastroPessoa", function(req, res){
     console.log('cadastro', req.body)
     db.serialize(function(){
-        db.run("insert into users(name, email, cnpj) values(?, ?, ?)", [req.body.name, req.body.email, req.body.cnpj])
+        db.run("insert into client(name, email, cpf) values(?, ?, ?)", [req.body.name, req.body.email, req.body.cpf])
     })
     db.close()
     res.send('dale')
@@ -53,10 +53,10 @@ app.post("/cadastroClientes", function(req, res){
 
 //cadastro estoque ==================================================================================================================
 
-app.post("/cadastroEmpresas", function(req, res){
+app.post("/cadastroEstoque", function(req, res){
     console.log('cadastro', req.body)
     db.serialize(function(){
-        db.run("insert into users(name, email, cnpj) values(?, ?, ?)", [req.body.name, req.body.email, req.body.cnpj])
+        db.run("insert into storage(name, quantity, price) values(?, ?, ?)", [req.body.name, req.body.quantity, req.body.price])
     })
     db.close()
     res.send('dale')

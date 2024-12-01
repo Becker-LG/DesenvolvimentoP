@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="cadastroEmpresa.css">
+    <title>Cadastro Empresas</title>
+</head>
+<body>
+    <div class="principal">
+        <h1>Cadastro de Empresas</h1>
+        <form id="formCadastroEmpresa">
+            <div class="campo">
+                <input type="text" placeholder="Nome da empresa" name="nameCadastroEmpresa">
+            </div>
+            <div class="campo">
+                <input  type="text" placeholder="Email" name="emailCadastroEmpresa">
+            </div>
+            <div class="campo">
+                <input type="text" placeholder="CNPJ" name="cnpjCadastroEmpresa">
+            </div>
+            <!--<div class="campo">
+                <input type="password" placeholder="Senha">
+            </div>
+            <div class="termos">
+                <input type="checkbox" id="checar">
+                <label for="checar">Aceitar os termos e políticas.</label>
+            </div>-->
+            <button class="glow-on-hover" type="button">Registrar-me</button>
+        </form>
+    </div>
+</body>
+<script>
+    const form = document.getElementById("formCadastroEmpresa")
+    form.addEventListener("submit", function(ev){
+        ev.preventDefault()
+        const formData = Object.fromEntries(new FormData(form).entries())
+        fetch("http://localhost:3000/cadastroEmpresa", {
+            method: "POST",
+            body: JSON.stringify({name: formData.nameCadastroEmpresa, email: formData.emailCadastroEmpresa, cnpj: formData.cnpjCadastroEmpresa}),
+            headers: {
+                "Content-Type":"application/json"
+            }
+        }).then(function(){
+            console.log('Cadastrado com sucesso!')
+        }).catch(function(){console.log('Deu merda.')})
+    })
+</script>
+</html>    
