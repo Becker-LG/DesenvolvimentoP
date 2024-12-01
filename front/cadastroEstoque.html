@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="formCadastroEstoque">
+        <input type="text" placeholder="Nome" name="nameCadastroEstoque">
+        <input type="text" placeholder="Quantidade" name="quantityCadastroEstoque">
+        <input type="text" placeholder="Preço" name="priceCadastroEstoque">
+        <button>Enviar</button>
+    </form>
+</body>
+<script>
+    const form = document.getElementById("formCadastroEstoque")
+    form.addEventListener("submit", function(ev){
+        ev.preventDefault()
+        const formData = Object.fromEntries(new FormData(form).entries())
+        fetch("http://localhost:3000/cadastroEstoque", {
+            method: "POST",
+            body: JSON.stringify({name: formData.nameCadastroEstoque, quantity: formData.quantityCadastroEstoque, price: formData.priceCadastroEstoque}),
+            headers: {
+                "Content-Type":"application/json"
+            }
+        }).then(function(){
+            console.log('Cadastrado com sucesso!')
+        }).catch(function(){console.log('Deu merda.')})
+    })
+</script>
+</html>
